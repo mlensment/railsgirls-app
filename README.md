@@ -116,19 +116,25 @@ After
 ```
 Add
 
+```html
     <th></th>
     <th></th>
+```
 
 Open /config/routes.rb
 
 Replace
 
+```ruby
     resources :ideas
+```
 
 With
 
+```ruby
     resources :ideas do
       member do
         post 'vote'
       end
     end
+```
