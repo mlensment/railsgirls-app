@@ -4,7 +4,7 @@ Open /app/views/ideas/index.html.erb
 
 Replace
 
-```ruby
+```html
 <td><%= link_to 'Show', idea %></td>
 ```
 
