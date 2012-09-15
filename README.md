@@ -25,6 +25,13 @@ a:visited.test { font-weight: bold;  color: red;}
 a.test { font-weight: bold; color: red;}
 ```
 
+Add padding to your table
+
+Add
+
+```css
+td { padding: 10px;}
+```
 
 ## Shorten the description on index
 Open /app/controllers/ideas_controller.rb
