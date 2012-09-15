@@ -1,3 +1,41 @@
+## Style your links
+Add css class to your link element
+Open /app/views/ideas/index.html.erb
+
+Replace
+
+    <td><%= link_to 'Show', idea %></td>
+
+With
+
+    <td><%= link_to 'Show', idea, class: 'test' %></td>
+
+Add CSS to design this link element
+
+Open /app/assets/stylesheets/application.css
+
+Add
+
+    a:visited.test { font-weight: bold;  color: red;}
+    a.test { font-weight: bold; color: red;}
+
+## Shorten the description on index
+Open /app/controllers/ideas_controller.rb
+
+After
+
+    @ideas = Idea.all
+
+Add
+
+
+    chars_to_display = 5
+    @ideas.each do |x|
+      if x.description.length > chars_to_display
+        x.description = x.description[0, 5] + '...'
+      end
+    end
+
 ## Add voting feature to your app
 
 Open db/schema.rb
