@@ -1,4 +1,4 @@
-1. Open db/schema.rb
+Open db/schema.rb
 
 Under
 
@@ -9,9 +9,9 @@ Add
     t.integer  "votes", :default => 0
     t.decimal  "score", :default => 0
 
-3. run ´rake db:setup´
+run `rake db:setup`
 
-4. Open app/controllers/ideas_controller.rb
+Open app/controllers/ideas_controller.rb
 
 Before
 
@@ -27,7 +27,7 @@ Add
       redirect_to '/'
     end
 
-5. Open /app/views/ideas/index.html.erb
+Open /app/views/ideas/index.html.erb
 
 After
 
@@ -56,7 +56,7 @@ Add
     <th></th>
     <th></th>
 
-6. Open /config/routes.rb
+Open /config/routes.rb
 
 Replace
 
