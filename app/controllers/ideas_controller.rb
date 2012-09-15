@@ -3,11 +3,24 @@ class IdeasController < ApplicationController
   # GET /ideas.json
   def index
     @ideas = Idea.all
-
+    chars_to_display = 5
+    @ideas.each do |x|
+      if x.description.length > chars_to_display
+        x.description = x.description[0, 5] + '...'
+      end
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @ideas }
     end
+  end
+
+  def vote
+    idea = Idea.find(params[:id])
+    idea.votes += 1
+    idea.score = idea.score + params[:idea][:score].to_d
+    idea.save!
+    redirect_to '/'
   end
 
   # GET /ideas/1

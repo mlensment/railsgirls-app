@@ -1,5 +1,9 @@
 Railsgirls::Application.routes.draw do
-  resources :ideas
+  resources :ideas do
+    member do
+      put 'vote'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
