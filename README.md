@@ -31,17 +31,20 @@ Open /app/controllers/ideas_controller.rb
 
 After
 
-    @ideas = Idea.all
+```ruby
+@ideas = Idea.all
+```
 
 Add
 
-
-    chars_to_display = 5
-    @ideas.each do |x|
-      if x.description.length > chars_to_display
-        x.description = x.description[0, 5] + '...'
-      end
-    end
+```ruby
+chars_to_display = 5
+@ideas.each do |x|
+  if x.description.length > chars_to_display
+    x.description = x.description[0, 5] + '...'
+  end
+end
+```
 
 ## Add voting feature to your app
 
@@ -49,12 +52,16 @@ Open db/schema.rb
 
 Under
 
-    t.string   "picture"
+```ruby
+t.string   "picture"
+```
 
 Add
 
-    t.integer  "votes", :default => 0
-    t.decimal  "score", :default => 0
+```ruby
+t.integer  "votes", :default => 0
+t.decimal  "score", :default => 0
+```
 
 run `rake db:setup`
 
@@ -62,26 +69,33 @@ Open app/controllers/ideas_controller.rb
 
 Before
 
-    end
+```ruby
+end
+```
 
 Add
 
-    def vote
-      idea = Idea.find(params[:id])
-      idea.votes += 1
-      idea.score = idea.score + params[:idea][:score].to_d
-      idea.save!
-      redirect_to '/'
-    end
+```ruby
+def vote
+  idea = Idea.find(params[:id])
+  idea.votes += 1
+  idea.score = idea.score + params[:idea][:score].to_d
+  idea.save!
+  redirect_to '/'
+end
+```
 
 Open /app/views/ideas/index.html.erb
 
 After
 
+```ruby
     <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+```
 
 Add
 
+```ruby
     <td>Score: <span id="score"><%= idea.score / idea.votes %></span></td>
     <td>
       <%= form_for(idea, url: vote_idea_path(idea), method: 'post') do |f| %>
@@ -93,11 +107,13 @@ Add
         <button>Vote!</button>
       <% end %>
     </td>
+```
 
 After
 
+```html
     <th></th>
-
+```
 Add
 
     <th></th>
