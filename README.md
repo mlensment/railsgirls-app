@@ -55,3 +55,17 @@ Add
 
     <th></th>
     <th></th>
+
+6. Open /config/routes.rb
+
+Replace
+
+    resources :ideas
+
+With
+
+    resources :ideas do
+      member do
+        post 'vote'
+      end
+    end
