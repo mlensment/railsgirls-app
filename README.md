@@ -90,35 +90,35 @@ Open /app/views/ideas/index.html.erb
 After
 
 ```ruby
-    <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 ```
 
 Add
 
 ```ruby
-    <td>Score: <span id="score"><%= idea.score / idea.votes %></span></td>
-    <td>
-      <%= form_for(idea, url: vote_idea_path(idea), method: 'post') do |f| %>
-        1<input type='radio' name='idea[score]' value='1' />
-        2<input type='radio' name='idea[score]' value='2' />
-        3<input type='radio' name='idea[score]' value='3' />
-        4<input type='radio' name='idea[score]' value='4' />
-        5<input type='radio' name='idea[score]' value='5' />
-        <button>Vote!</button>
-      <% end %>
-    </td>
+<td>Score: <span id="score"><%= idea.score / idea.votes %></span></td>
+<td>
+  <%= form_for(idea, url: vote_idea_path(idea), method: 'post') do |f| %>
+    1<input type='radio' name='idea[score]' value='1' />
+    2<input type='radio' name='idea[score]' value='2' />
+    3<input type='radio' name='idea[score]' value='3' />
+    4<input type='radio' name='idea[score]' value='4' />
+    5<input type='radio' name='idea[score]' value='5' />
+    <button>Vote!</button>
+  <% end %>
+</td>
 ```
 
 After
 
 ```html
-    <th></th>
+<th></th>
 ```
 Add
 
 ```html
-    <th></th>
-    <th></th>
+<th></th>
+<th></th>
 ```
 
 Open /config/routes.rb
@@ -126,15 +126,15 @@ Open /config/routes.rb
 Replace
 
 ```ruby
-    resources :ideas
+resources :ideas
 ```
 
 With
 
 ```ruby
-    resources :ideas do
-      member do
-        post 'vote'
-      end
-    end
+resources :ideas do
+  member do
+    post 'vote'
+  end
+end
 ```
