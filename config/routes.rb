@@ -1,7 +1,7 @@
 Railsgirls::Application.routes.draw do
   resources :ideas do
     member do
-      put 'vote'
+      post 'vote'
     end
   end
 

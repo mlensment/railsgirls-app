@@ -1,3 +1,5 @@
+## Add voting feature to your app
+
 Open db/schema.rb
 
 Under
@@ -37,7 +39,7 @@ Add
 
     <td>Score: <span id="score"><%= idea.score / idea.votes %></span></td>
     <td>
-      <%= form_for(idea, url: vote_idea_path(idea), method: 'put') do |f| %>
+      <%= form_for(idea, url: vote_idea_path(idea), method: 'post') do |f| %>
         1<input type='radio' name='idea[score]' value='1' />
         2<input type='radio' name='idea[score]' value='2' />
         3<input type='radio' name='idea[score]' value='3' />
