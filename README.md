@@ -4,13 +4,15 @@ Open /app/views/ideas/index.html.erb
 
 Replace
 
-```html
+```ruby
 <td><%= link_to 'Show', idea %></td>
 ```
 
 With
 
-    <td><%= link_to 'Show', idea, class: 'test' %></td>
+```ruby
+<td><%= link_to 'Show', idea, class: 'test' %></td>
+```
 
 Add CSS to design this link element
 
@@ -18,8 +20,11 @@ Open /app/assets/stylesheets/application.css
 
 Add
 
-    a:visited.test { font-weight: bold;  color: red;}
-    a.test { font-weight: bold; color: red;}
+```css
+a:visited.test { font-weight: bold;  color: red;}
+a.test { font-weight: bold; color: red;}
+```
+
 
 ## Shorten the description on index
 Open /app/controllers/ideas_controller.rb
