@@ -23,8 +23,8 @@ Open /app/assets/stylesheets/application.css
 Add
 
 ```css
-a:visited.test { font-weight: bold;  color: red;}
 a.test { font-weight: bold; color: red; text-decoration:none;}
+a.test:visited { font-weight: bold; color: red;}
 ```
 
 ##### To make your table look nicer, add padding 
