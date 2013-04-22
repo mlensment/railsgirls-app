@@ -139,7 +139,7 @@ After
 Add
 
 ```ruby
-<td><span id="score"><%= idea.score.to_d / idea.votes.to_i %></span></td>
+<td><span id="score"><%= idea.score.to_d / idea.votes %></span></td>
 
 <td>
   <%= form_for(idea, url: vote_idea_path(idea), method: 'post') do |f| %>
