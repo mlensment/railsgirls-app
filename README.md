@@ -1,5 +1,7 @@
 ## Style your links
-Add css class to your link element
+
+##### Add CSS class to your link element
+
 Open /app/views/ideas/index.html.erb
 
 Replace
@@ -14,20 +16,18 @@ With
 <td><%= link_to 'Show', idea, class: 'test' %></td>
 ```
 
-Add CSS to design this link element
+##### Add CSS to design this link element
 
 Open /app/assets/stylesheets/application.css
 
 Add
 
 ```css
-a:visited.test { font-weight: bold;  color: red;}
-a.test { font-weight: bold; color: red;}
+a.test { font-weight: bold; color: red; text-decoration:none;}
+a.test:visited { font-weight: bold; color: red;}
 ```
 
-Add padding to your table
-
-Add
+##### To make your table look nicer, add padding 
 
 ```css
 td { padding: 10px;}
@@ -45,36 +45,54 @@ After
 Add
 
 ```ruby
-chars_to_display = 5
+chars_to_display = 50
 @ideas.each do |x|
   if x.description.length > chars_to_display
-    x.description = x.description[0, 5] + '...'
+    x.description = x.description[0, 50] + '...'
   end
 end
 ```
 
 ## Add voting feature to your app
 
-Open db/schema.rb
+Open your terminal and run the command `rails g migration AddFields`
 
-Under
+Go to db/migrate
 
-```ruby
-t.string   "picture"
-```
+Find a file with a similar name: 20130418195753_add_fields.rb
 
-Add
+Open it and replace 
 
 ```ruby
-t.integer  "votes", :default => 0
-t.decimal  "score", :default => 0
+  def up
+  end
+
+  def down
+  end
+end
 ```
 
-run `rake db:setup`
+With
+
+```ruby
+  def up
+    add_column :ideas, :votes, :integer, :default => 0
+    add_column :ideas, :score, :decimal, :default => 0
+  end
+
+  def down
+    remove_column :ideas, :votes
+    remove_column :ideas, :score
+  end
+end
+```
+
+Run the command `rake db:migrate`
+
 
 Open app/controllers/ideas_controller.rb
 
-Before
+Before the very last
 
 ```ruby
 end
@@ -90,42 +108,6 @@ def vote
   idea.save!
   redirect_to '/'
 end
-```
-
-Open /app/views/ideas/index.html.erb
-
-After
-
-```ruby
-<td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-```
-
-Add
-
-```ruby
-<td>Score: <span id="score"><%= idea.score / idea.votes %></span></td>
-<td>
-  <%= form_for(idea, url: vote_idea_path(idea), method: 'post') do |f| %>
-    1<input type='radio' name='idea[score]' value='1' />
-    2<input type='radio' name='idea[score]' value='2' />
-    3<input type='radio' name='idea[score]' value='3' />
-    4<input type='radio' name='idea[score]' value='4' />
-    5<input type='radio' name='idea[score]' value='5' />
-    <button>Vote!</button>
-  <% end %>
-</td>
-```
-
-After
-
-```html
-<th></th>
-```
-Add
-
-```html
-<th></th>
-<th></th>
 ```
 
 Open /config/routes.rb
@@ -144,4 +126,41 @@ resources :ideas do
     post 'vote'
   end
 end
+```
+
+Open /app/views/ideas/index.html.erb
+
+After
+
+```ruby
+<td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+```
+
+Add
+
+```ruby
+<td><span id="score"><%= idea.score.to_d / idea.votes %></span></td>
+
+<td>
+  <%= form_for(idea, url: vote_idea_path(idea), method: 'post') do |f| %>
+    1 <input type='radio' name='idea[score]' value='1' />
+    2 <input type='radio' name='idea[score]' value='2' />
+    3 <input type='radio' name='idea[score]' value='3' />
+    4 <input type='radio' name='idea[score]' value='4' />
+    5 <input type='radio' name='idea[score]' value='5' />
+    <button>Vote!</button>
+  <% end %>
+</td>
+```
+
+After
+
+```html
+<th></th>
+```
+Add
+
+```html
+<th>Score</th>
+<th width="20%">Vote</th>
 ```
